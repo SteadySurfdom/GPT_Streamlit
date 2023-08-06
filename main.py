@@ -4,7 +4,7 @@ import os
 import streamlit as st
 
 load_dotenv()
-openai.api_key = "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"
+openai.api_key = st.secrets["API_KEY"]
 output = {
         "choices": [
             {
