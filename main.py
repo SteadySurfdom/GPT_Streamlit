@@ -4,17 +4,15 @@ import os
 import streamlit as st
 
 load_dotenv()
-openai.api_key = st.secrets['API_KEY']  # capped at 5$ (No need to add it to st.secrets)
+openai.api_key = "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"  # capped at 5$ (No need to add it to st.secrets)
 output = {"choices": [{"message": {"content": "Hi, How can I help you today?"}}]}
-context = "Answer respectfully. You are an obedient chatbot."
 with st.sidebar:
     with st.form(key="querySubmission"):
-        context_entered = st.text_area(
+        context = st.text_area(
             "CONTEXT",
             placeholder="Enter the context paragraph",
             key="1",
         )
-        context = context_entered if context_entered else context
         query = st.text_area(
             "QUERY",
             placeholder="Enter the query",
@@ -32,17 +30,7 @@ with st.sidebar:
                     {"role": "user", "content": query},
                 ],
             )
-            # output = {
-            #     "choices": [
-            #         {
-            #             "message": {
-            #                 "content": f"API ran with context:{context} and query:{query}"
-            #             }
-            #         }
-            #     ]
-            # }
-        if not query:
-            st.markdown(f"Query not entered</div>", unsafe_allow_html=True)
+
 st.markdown(
-    f'<div>{output["choices"][0]["message"]["content"]}</div>', unsafe_allow_html=True
+    f'{output["choices"][0]["message"]["content"]}</div>', unsafe_allow_html=True
 )
